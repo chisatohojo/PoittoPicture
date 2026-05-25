@@ -4,9 +4,9 @@
 
 ## 使い方
 
-1. `dist/PoittoPicture.exe` を起動します。
-2. 画像フォルダを選択します。
-3. キーボードで画像を選別します。
+1. `dist/poitto-picture_v0.1.0_windows.zip` を展開します。
+2. 展開したフォルダ内の `poitto-picture.exe` を起動します。
+3. 画像フォルダを選択して、キーボードで画像を選別します。
 
 ## キー操作
 
@@ -29,8 +29,8 @@
 
 ## 開発・再ビルド
 
-```powershell
-.\build_exe.ps1
+```bat
+build.bat
 ```
 
-ビルド後の exe は `dist/PoittoPicture.exe` に出力されます。
+ビルド後、BOOTH などで配布しやすい zip が `dist/poitto-picture_v0.1.0_windows.zip` に出力されます。

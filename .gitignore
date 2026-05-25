@@ -6,4 +6,4 @@ __pycache__/
 *.log
 
 dist/*
-!dist/PoittoPicture.exe
+!dist/poitto-picture_v*_windows.zip
