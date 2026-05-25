@@ -16,6 +16,7 @@ except Exception:  # pragma: no cover - optional dependency fallback
 
 
 APP_NAME = "ぽいっとピクチャ"
+HELP_TEXT = "操作:  ← / A：前へ    → / D / Enter：次へ    Backspace / Delete：ぽいっと削除"
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif"}
 
 
@@ -92,6 +93,7 @@ class PoittoPictureApp:
 
         footer = tk.Frame(self.root, bg="#20242d", padx=14, pady=10)
         footer.pack(fill=tk.X, side=tk.BOTTOM)
+        footer.bind("<Configure>", self._update_footer_wrap)
 
         self.info_var = tk.StringVar(value="")
         self.status_var = tk.StringVar(value="")
@@ -102,9 +104,23 @@ class PoittoPictureApp:
             fg="#f4f6fb",
             bg="#20242d",
             anchor="w",
+            justify=tk.LEFT,
             font=("Yu Gothic UI", 11),
         )
         self.info_label.pack(fill=tk.X)
+
+        self.help_label = tk.Label(
+            footer,
+            text=HELP_TEXT,
+            fg="#ffe8f3",
+            bg="#2a303b",
+            anchor="w",
+            justify=tk.LEFT,
+            font=("Yu Gothic UI", 10, "bold"),
+            padx=10,
+            pady=6,
+        )
+        self.help_label.pack(fill=tk.X, pady=(7, 0))
 
         self.status_label = tk.Label(
             footer,
@@ -112,9 +128,16 @@ class PoittoPictureApp:
             fg="#aeb7c6",
             bg="#20242d",
             anchor="w",
+            justify=tk.LEFT,
             font=("Yu Gothic UI", 9),
         )
         self.status_label.pack(fill=tk.X, pady=(4, 0))
+
+    def _update_footer_wrap(self, event: tk.Event) -> None:
+        wrap_width = max(event.width - 28, 240)
+        self.info_label.configure(wraplength=wrap_width)
+        self.help_label.configure(wraplength=wrap_width)
+        self.status_label.configure(wraplength=wrap_width)
 
     def _bind_keys(self) -> None:
         for key in ("<Right>", "<Return>", "<Key-d>", "<Key-D>"):
